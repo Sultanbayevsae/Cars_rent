@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,7 +14,8 @@ import java.util.UUID;
 @ToString
 @Table(name = "user_history")
 @Builder
-public class UserHistory extends Base{
+public class History extends Base{
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
