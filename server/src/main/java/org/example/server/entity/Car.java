@@ -42,7 +42,7 @@ public class Car extends Base{
     private int seats;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<LikedCars>carsliked = new ArrayList<>();
+    private List<Rating> ratings = new ArrayList<>();
 
     @OneToMany (mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> rentHistories = new ArrayList<>();
