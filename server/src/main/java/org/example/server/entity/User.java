@@ -52,7 +52,9 @@ public class User extends Base implements UserDetails{
     private LocalDateTime expiryDate;
 
     @Column(name = "enabled", nullable = false)
-    private boolean enabled;
+    private boolean enabled = false;
+
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> history = new ArrayList<>();
