@@ -21,6 +21,4 @@ public class Address extends Base{
     @JoinColumn(name = "district_id", nullable = false)
     private District district;
 
-    @Column(length = 500)
-    private String details;
 }

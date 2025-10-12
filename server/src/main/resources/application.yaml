@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cars_db
+    username: postgres
+    password: linux
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+
+jwt:
+  secret:
+    key: 4546a6e1745c9b6a5ae28d36b629b0d78830d29fceb82f47cfb254ca1debc291
+    expired-date: 8640000

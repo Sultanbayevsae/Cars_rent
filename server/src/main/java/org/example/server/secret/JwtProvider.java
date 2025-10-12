@@ -37,7 +37,8 @@ public class JwtProvider {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             System.out.println("User ID: " + user.getId());
-            return Jwts.builder().setSubject(username).setIssuer("carshop.uz")
+            return Jwts.builder().setSubject(user.getId().toString())
+                    .setIssuer("carshop.uz")
                     .setIssuedAt(new Date())
                     .claim("roles", user.getRoles())
                     .setExpiration(new Date(System.currentTimeMillis() + EXPIRED_DATE))
