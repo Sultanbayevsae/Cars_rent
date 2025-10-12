@@ -13,13 +13,12 @@ import lombok.*;
 @Table(name = "address")
 public class Address extends Base{
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "region_id", nullable = false)
-    private Region region;
+    @Column(length = 100, nullable = false)
+    private String cityOrtown;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "district_id", nullable = false)
-    private District district;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private User userId;
+
 
     @Column(length = 500)
     private String details;
