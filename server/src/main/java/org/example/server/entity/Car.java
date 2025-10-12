@@ -41,15 +41,18 @@ public class Car extends Base{
     @Column(nullable = false)
     private int seats;
 
+    @ManyToOne
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
+
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rating> ratings = new ArrayList<>();
 
     @OneToMany (mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> rentHistories = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "car_photo_id", nullable = false)
-    private CarsPhoto carsPhoto;
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CarsPhoto> carsPhoto = new ArrayList<>();
 
     @OneToMany(mappedBy = "car")
     private List<Rental> rentals = new ArrayList<>();
