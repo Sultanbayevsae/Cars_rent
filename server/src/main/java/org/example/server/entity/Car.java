@@ -51,4 +51,7 @@ public class Car extends Base{
     @JoinColumn(name = "car_photo_id", nullable = false)
     private CarsPhoto carsPhoto;
 
+    @OneToMany(mappedBy = "car")
+    private List<Rental> rentals = new ArrayList<>();
+
 }

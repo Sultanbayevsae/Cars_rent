@@ -42,6 +42,13 @@ public class User extends Base implements UserDetails{
     )
     private Set<Role> roles;
 
+    @ManyToOne
+    @JoinColumn(name = "billing_address_id", nullable = false)
+    private Address billingAddress;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rental> rentals = new ArrayList<>();
+
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
 
