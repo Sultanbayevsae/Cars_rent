@@ -1,5 +1,6 @@
 package org.example.server.mapper;
 
+import jakarta.validation.constraints.NotBlank;
 import org.example.server.dto.CarCreator;
 import org.example.server.entity.Branch;
 import org.example.server.entity.Car;
@@ -14,6 +15,7 @@ import java.util.UUID;
 public interface CarMapper {
 
 
+    @NotBlank
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "branch", source = "creator.branchId", qualifiedByName = "mapBranch")
     Car toEntity(CarCreator creator, @Context BranchRepository branchRepository);

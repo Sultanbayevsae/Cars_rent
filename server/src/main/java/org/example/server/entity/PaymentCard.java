@@ -21,7 +21,7 @@ public class PaymentCard{
     private String cardHolderName;
     private String expiryDate;
 
-    private String token; // token from bank api
+    private String token;
     private boolean active = true;
 
     @ManyToOne
