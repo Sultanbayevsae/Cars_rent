@@ -17,7 +17,7 @@ public class Address extends Base{
     private String cityOrtown;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private User userId;
+    private User user;
 
 
 }

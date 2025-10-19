@@ -16,13 +16,14 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public ApiResponse activateUser(UUID id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {
-            return new ApiResponse(false, "❌ User topilmadi!");
+            return new ApiResponse(false, "❌ User topilmadi!", Optional.empty());
         }
 
         User user = optionalUser.get();

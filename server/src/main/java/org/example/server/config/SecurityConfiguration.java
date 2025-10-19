@@ -35,12 +35,14 @@ public class SecurityConfiguration {
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
+            "/swagger-ui/index.html",
             "/swagger-resources/**",
             "/configuration/ui",
             "/configuration/security",
             "/webjars/**",
             "/actuator/**"
     };
+
     public static final String[] PUBLIC_APIS = {
             "/api/v1/auth/**",
             "/api/v1/desktop/auth/**",
@@ -59,7 +61,9 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -69,9 +73,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain configure(final HttpSecurity http) throws Exception {
         return http
-                .cors(cors -> {
-                    cors.configurationSource(corsConfigurationSource());
-                })
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(SWAGGER_AND_ACTUATOR).permitAll()
@@ -80,8 +82,8 @@ public class SecurityConfiguration {
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(authenticationEntryPoint()) // 401 Forbidden
-                        .accessDeniedHandler(accessDeniedHandler())) // 403 Forbidden
+                        .authenticationEntryPoint(authenticationEntryPoint())
+                        .accessDeniedHandler(accessDeniedHandler()))
                 .addFilterBefore(filter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
@@ -89,15 +91,14 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        //configuration.addAllowedOriginPattern(List.of("localhost:3000","http://localhost:3000","http://localhost:8080"));
         configuration.addAllowedOriginPattern("*");
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","PATCH"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/api/**", configuration);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler(){

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "payment_cards")
 @AllArgsConstructor
@@ -14,8 +16,8 @@ import lombok.Setter;
 @Setter
 public class PaymentCard{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String cardNumberMasked;
     private String cardHolderName;

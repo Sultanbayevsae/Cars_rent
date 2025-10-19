@@ -21,7 +21,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "")
     @JoinColumn(name = "rental_id", nullable = false)
     private Rental rental;
 

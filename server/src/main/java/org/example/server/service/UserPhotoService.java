@@ -7,10 +7,6 @@ import java.util.UUID;
 
 public interface UserPhotoService {
     ApiResponse uploadPhoto(UUID userId, MultipartFile file);
-
-    Byte[] getPhoto(UUID userId);
-
+    byte[] getPhoto(UUID userId);
     ApiResponse deletePhoto(UUID userId);
-
-    ApiResponse updatePhoto(UUID userId, MultipartFile file);
 }

@@ -1,5 +1,6 @@
-CREATE TABLE regions
-(
-    id   BIGSERIAL PRIMARY KEY,
+--liquibase formatted sql
+--changeset system:002
+CREATE TABLE regions (
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE
 );
