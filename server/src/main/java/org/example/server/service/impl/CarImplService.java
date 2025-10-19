@@ -50,11 +50,7 @@ public class CarImplService implements CarService {
     @Override
     public ApiResponse findCarById(UUID carId) {
         Optional<Car> entity = carRepository.findById(carId);
-        if (entity.isPresent()) {
-            return new ApiResponse(true, "Car found!", entity.get());
-        } else {
-            return new ApiResponse(false, "Car with id " + carId + " not found!");
-        }
+        return entity.map(car -> new ApiResponse(true, "Car found!", car)).orElseGet(() -> new ApiResponse(false, "Car with id " + carId + " not found!"));
     }
 
     @Override
