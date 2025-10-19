@@ -18,9 +18,11 @@ import java.util.List;
 public class Branch extends Base{
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
+    @Column(length = 100, nullable = false)
+    private String cityOrtown;
+
+    @Column(length = 500)
+    private String details;
 
     @OneToMany(mappedBy = "branch")
     private List<Car> car = new ArrayList<>();
