@@ -15,18 +15,16 @@ public interface BranchMapper {
     Branch toEntity(BranchCreator creator);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "car", ignore = true)
-    @Mapping(target = "address", source = "updater", qualifiedByName = "updateAddress")
     void updateBranchFromDto(BranchUpdater updater, @MappingTarget Branch branch);
 
     @Named("updateAddress")
     default void updateAddress(BranchUpdater updater, @MappingTarget Address address) {
-        if (updater.cityOrTown() != null) {
-            address.setCityOrTown(updater.cityOrTown());
+        if (updater.CityOrTown() != null) {
+            address.setCityOrTown(updater.CityOrTown());
         }
-        if (updater.details() != null) {
-            address.setDetails(updater.details());
+        if (updater.detailAddress() != null) {
+            address.setDetails(updater.detailAddress());
         }
     }
     @Mapping(target = "address", source = "branch.address")

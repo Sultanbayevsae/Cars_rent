@@ -1,40 +1,89 @@
 package org.example.server.exception;
 
-import org.example.server.dto.ApiResponse;
-import org.springframework.http.HttpStatus;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return ResponseEntity.badRequest()
-                .body(new ApiResponse(false, "Validation failed", errors));
+    @ExceptionHandler(DataNotFountException.class)
+    public ResponseEntity<ErrorDTO> error_404(DataNotFountException e, HttpServletRequest req){
+        return ResponseEntity
+                .status(404)
+                .body(ErrorDTO.builder()
+                        .errorPath(req.getRequestURI())
+                        .errorBody(e.getMessage())
+                        .errorCode(404)
+                        .build()
+                );
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiResponse> handleRuntimeException(RuntimeException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ApiResponse(false, ex.getMessage()));
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorDTO> methodArgumentTypeException_400(MethodArgumentTypeMismatchException e, HttpServletRequest req){
+        return ResponseEntity
+                .status(400)
+                .body(ErrorDTO.builder()
+                        .errorPath(req.getRequestURI())
+                        .errorBody(e.getMessage())
+                        .errorCode(400)
+                        .build()
+                );
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorDTO> methodArgumentNotValidException_400(MethodArgumentNotValidException e, HttpServletRequest req){
+        Map<String, List<String>> errorBody = new HashMap<>();
+        for (FieldError fieldError : e.getFieldErrors()) {
+            String field = fieldError.getField();
+            String message = fieldError.getDefaultMessage();
+
+            errorBody.get(field);
+            // key=value
+            errorBody.compute(field, (k_field, v_messages) ->{
+                v_messages = Objects.requireNonNullElse(v_messages, new ArrayList<>());
+                v_messages.add(message);
+                return v_messages;
+            });
+        }
+
+        if (errorBody.isEmpty()) {
+            String message = e.getBindingResult()
+                    .getAllErrors()
+                    .stream()
+                    .findFirst()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .orElse(e.getMessage());
+            errorBody.put("ERROR", List.of(message));
+        }
+        return ResponseEntity
+                .status(400)
+                .body(ErrorDTO.builder()
+                        .errorPath(req.getRequestURI())
+                        .errorBody(errorBody)
+                        .errorCode(400)
+                        .build()
+                );
+    }
+
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse> handleGenericException(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ApiResponse(false, "An error occurred: " + ex.getMessage()));
+    public ResponseEntity<ErrorDTO> exception_500(Exception e, HttpServletRequest req){
+        return ResponseEntity
+                .status(500)
+                .body(ErrorDTO.builder()
+                        .errorPath(req.getRequestURI())
+                        .errorBody(e.getMessage())
+                        .errorCode(500)
+                        .build()
+                );
     }
+
 }

@@ -11,8 +11,9 @@ public record BranchUpdater(
         @NotBlank(message = "Branch name must not be blank")
         String name,
         @NotBlank(message = "Branch address must not be blank")
-        String cityOrTown,
+        String CityOrTown,
         @NotBlank(message = "Branch detail address must not be blank")
-        String details
+        String detailAddress
+
 ) {
 }

@@ -16,7 +16,7 @@ public interface UserMapper {
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "roles", ignore = true)
     @Mapping(target = "history", ignore = true)
-    @Mapping(target = "likedCars", ignore = true)
+//    @Mapping(target = "likedCars", ignore = true)
     @Mapping(target = "verifyToken", ignore = true)
     @Mapping(target = "expiryDate", ignore = true)
     @Mapping(target = "enabled", ignore = true)
