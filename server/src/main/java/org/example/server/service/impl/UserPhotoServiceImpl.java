@@ -88,8 +88,8 @@ public class UserPhotoServiceImpl implements UserPhotoService {
         return new ApiResponse(false, "UserPhoto not found by userId: " + userId);
     }
 
-    @Override
     @Transactional
+    @Override
     public ApiResponse updatePhoto(UUID userId, MultipartFile file) {
         deletePhoto(userId);
         return uploadPhoto(userId, file);

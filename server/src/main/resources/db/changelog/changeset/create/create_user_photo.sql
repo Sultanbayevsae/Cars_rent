@@ -1,12 +1,11 @@
-create table user_photos
-(
-    id           uuid primary key default uuid_generate_v4(),
-    created_at   timestamp        default current_timestamp not null,
-    updated_at   timestamp        default current_timestamp not null,
-    user_id     uuid                                       not null,
-    bytes        bytea                                      not null,
-    content_type varchar(255)                               not null,
-
-    constraint fk_house_photos_user
-        foreign key (user_id) references users (id) on delete cascade
+--liquibase formatted sql
+--changeset system:012
+CREATE TABLE user_photo (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL UNIQUE,
+    bytes BYTEA NOT NULL,
+    content_type VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_user_photo_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );

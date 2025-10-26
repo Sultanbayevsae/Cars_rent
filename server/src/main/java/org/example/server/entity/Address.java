@@ -10,16 +10,17 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString
-@Table(name = "address")
+@Table(name = "addresses")
 public class Address extends Base{
 
-    @Column(length = 100, nullable = false)
-    private String cityOrtown;
+    @Column(name = "city_or_town", length = 100, nullable = false)
+    private String cityOrTown;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private User userId;
-
-
-    @Column(length = 500)
+    @Column(name = "details", length = 100, nullable = false)
     private String details;
+
+//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
 }

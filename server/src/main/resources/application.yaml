@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cars_db
+    username: postgres
+    password: linux
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  task:
+    execution:
+      pool:
+        core-size: 5
+        max-size: 10
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: doniyork334@gmail.com
+    password: "jptq wpqc hyuq rawc"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          timeout: 10000
+          connectiontimeout: 10000
+          writetimeout: 10000
+  output:
+    ansi:
+      enabled: ALWAYS
+logging:
+    file:
+      name: logs/application.log
+    level:
+      org.example.server: DEBUG
+      org.springframework.security: DEBUG
+      org.springframework.mail: DEBUG
+    pattern:
+      console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} --- %clr(%logger{36}){cyan} : %m%n"
+
+jwt:
+  secret:
+    key: supercalifragilisticexpialidociousNewChemicalUndisputableLeadershipOfWorldLeaders202510
+    access-exp-ms: 9000000
+    refresh-exp-ms: 12096000000

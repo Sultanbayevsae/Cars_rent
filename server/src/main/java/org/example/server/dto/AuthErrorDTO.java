@@ -1,14 +1,21 @@
 package org.example.server.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
 public class AuthErrorDTO {
-    private String errorMessage;
+    private String message;
     private String errorPath;
-    private Integer errorCode;
+    private int status;
+
+    public AuthErrorDTO(String message, String errorPath, int status){
+        this.message = message;
+        this.errorPath = errorPath;
+        this.status = status;
+    }
 }
+

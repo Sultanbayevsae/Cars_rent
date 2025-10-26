@@ -3,15 +3,17 @@ package org.example.server.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletOutputStream;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.server.dto.AuthErrorDTO;
-import org.example.server.secret.JwtFilter;
+import org.example.server.security.JwtAuthenticationFilter;
+import org.example.server.security.JwtUtil;
+import org.example.server.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,20 +29,23 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 @Configuration
-@EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityConfiguration {
+
     private static final String[] SWAGGER_AND_ACTUATOR = {
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
+            "/swagger-ui/index.html",
             "/swagger-resources/**",
             "/configuration/ui",
             "/configuration/security",
             "/webjars/**",
             "/actuator/**"
     };
+
     public static final String[] PUBLIC_APIS = {
             "/api/v1/auth/**",
             "/api/v1/desktop/auth/**",
@@ -52,76 +57,86 @@ public class SecurityConfiguration {
     };
 
     private final ObjectMapper objectMapper;
+    private final JwtUtil jwtUtil;
+    private final CustomUserDetailsService userDetailsService;
 
     @Bean
-    public JwtFilter filter() {
-        return new JwtFilter();
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter(jwtUtil, userDetailsService);
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain configure(final HttpSecurity http) throws Exception {
-        return http
-                .cors(cors -> {
-                    cors.configurationSource(corsConfigurationSource());
-                })
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(SWAGGER_AND_ACTUATOR).permitAll()
                         .requestMatchers(PUBLIC_APIS).permitAll()
                         .anyRequest().authenticated()
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(authenticationEntryPoint()) // 401 Forbidden
-                        .accessDeniedHandler(accessDeniedHandler())) // 403 Forbidden
-                .addFilterBefore(filter(), UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(authenticationEntryPoint())
+                        .accessDeniedHandler(accessDeniedHandler())
+                )
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        //configuration.addAllowedOriginPattern(List.of("localhost:3000","http://localhost:3000","http://localhost:8080"));
         configuration.addAllowedOriginPattern("*");
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","PATCH"));
+        configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/api/**", configuration);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 
-
     @Bean
-    public AccessDeniedHandler accessDeniedHandler(){
-        return ((request, response, authException) -> {
-            authException.printStackTrace();
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, authException) -> {
             String errorPath = request.getRequestURI();
             String errorMessage = authException.getMessage() + ". You do not have permission or role to access this resource";
             AuthErrorDTO authErrorDTO = new AuthErrorDTO(errorMessage, errorPath, 403);
+
             response.setStatus(403);
-            ServletOutputStream outputStream = response.getOutputStream();
-            objectMapper.writeValue(outputStream, authErrorDTO);
-        });
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+            ServletOutputStream out = response.getOutputStream();
+            objectMapper.writeValue(out, authErrorDTO);
+            out.flush();
+        };
     }
 
     @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint(){
-        return ((request, response, authException) -> {
-            authException.printStackTrace();
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return (request, response, authException) -> {
             String errorPath = request.getRequestURI();
             String errorMessage = authException.getMessage() + ". You are not authorized to access this resource";
             AuthErrorDTO authErrorDTO = new AuthErrorDTO(errorMessage, errorPath, 401);
             response.setStatus(401);
-            ServletOutputStream outputStream = response.getOutputStream();
-            objectMapper.writeValue(outputStream, authErrorDTO);
-        });
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+            ServletOutputStream out = response.getOutputStream();
+            objectMapper.writeValue(out, authErrorDTO);
+            out.flush();
+        };
     }
 }

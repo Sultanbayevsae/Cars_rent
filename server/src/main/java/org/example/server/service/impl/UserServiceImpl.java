@@ -16,13 +16,14 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public ApiResponse activateUser(UUID id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {
-            return new ApiResponse(false, "❌ User topilmadi!");
+            return new ApiResponse(false, "❌ User topilmadi!", Optional.empty());
         }
 
         User user = optionalUser.get();
@@ -34,6 +35,15 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return new ApiResponse(true, "🎉 Profilingiz muvaffaqiyatli aktivlashtirildi!");
+    }
+
+    @Override
+    public ApiResponse ignoreActivation(UUID id) {
+        Optional<User> optional = userRepository.findById(id);
+        if (optional.isEmpty())
+            return new ApiResponse(false, "User Not Found!");
+        userRepository.deleteById(id);
+        return new ApiResponse(true, "Activation for this account has been ignored and deleted!...");
     }
 
 }

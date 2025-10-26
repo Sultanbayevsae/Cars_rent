@@ -1,6 +1,6 @@
 package org.example.server.mapper;
 
-import org.example.server.dto.LIkedCarsCreator;
+import org.example.server.dto.LikedCarsCreator;
 import org.example.server.dto.LIkedCarsResponse;
 import org.example.server.entity.Car;
 import org.example.server.entity.LikedCars;
@@ -17,7 +17,7 @@ public interface LikedCarsMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "creator.userId", qualifiedByName = "mapUser")
     @Mapping(target = "car", source = "creator.carId", qualifiedByName = "mapCar")
-    LikedCars toEntity(LIkedCarsCreator creator, @Context UserRepository userRepo, @Context CarRepository carRepo);
+    LikedCars toEntity(LikedCarsCreator creator, @Context UserRepository userRepo, @Context CarRepository carRepo);
 
     @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "firstName", source = "user.firstName")

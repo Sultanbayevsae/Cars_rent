@@ -18,14 +18,14 @@ public class History extends Base{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User userId;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id", nullable = false)
-    private Car carId;
+    private Car car;
 
     @Column(name = "rental_time", nullable = false)
-    private LocalDateTime rental_time;
+    private LocalDateTime rentalTime;
     @Column(name = "return_time")
-    private LocalDateTime return_time;
+    private LocalDateTime returnTime;
 }

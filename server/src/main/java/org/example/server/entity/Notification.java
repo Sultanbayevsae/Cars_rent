@@ -31,13 +31,18 @@ public class Notification {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "rental_id", nullable = false)
+    @JoinColumn(name = "transaction_id", nullable = false)
     private Transaction transaction;
 
     @ManyToOne
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 
-
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @PrePersist
+    public void onCreate(){
+        this.createdAt = LocalDateTime.now();
+    }
 }

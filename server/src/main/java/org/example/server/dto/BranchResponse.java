@@ -15,5 +15,5 @@ public record BranchResponse(
         String cityOrtown,
         @JsonProperty("branch_address_detail")
         String details
-) {
-}
+
+) {}

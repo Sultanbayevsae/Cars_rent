@@ -14,5 +14,6 @@ public record BranchUpdater(
         String CityOrTown,
         @NotBlank(message = "Branch detail address must not be blank")
         String detailAddress
+
 ) {
 }

@@ -9,6 +9,7 @@ import org.example.server.dto.CarCreator;
 import org.example.server.dto.CarUpdater;
 import org.example.server.repository.CarRepository;
 import org.example.server.service.CarService;
+import org.example.server.utill.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,8 @@ import java.util.UUID;
 
 @Tag(name = "Car Controller", description = "Car CRUD operations")
 @RestController
-@RequestMapping(CarController.BaseUrl)
-public class CarController {
-    public static final String BaseUrl = "/cars";
+@RequestMapping(AppConstants.BASE_URL + "/cars")
+public class CarController {;
     private final CarRepository carRepository;
     private final CarService carService;
 
