@@ -1,7 +1,3 @@
-// ============================================================================
-// 7. FIXED: UserMapper.java
-// Location: src/main/java/org/example/server/mapper/UserMapper.java
-// ============================================================================
 package org.example.server.mapper;
 
 import org.example.server.dto.RegisterDto;
@@ -21,7 +17,6 @@ public interface UserMapper {
     @Mapping(target = "roles", ignore = true)
     @Mapping(target = "history", ignore = true)
     @Mapping(target = "likedCars", ignore = true)
-    @Mapping(target = "address", ignore = true)
     @Mapping(target = "verifyToken", ignore = true)
     @Mapping(target = "expiryDate", ignore = true)
     @Mapping(target = "enabled", ignore = true)

@@ -23,5 +23,4 @@ public class Address extends Base{
 //    @JoinColumn(name = "user_id")
 //    private User user;
 
-
 }

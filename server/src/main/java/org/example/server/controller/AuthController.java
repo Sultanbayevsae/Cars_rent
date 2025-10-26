@@ -1,8 +1,4 @@
-// ============================================================================
-// 10. NEW: AuthController.java
-// Location: src/main/java/org/example/server/controller/AuthController.java
-// ============================================================================
-        package org.example.server.controller;
+package org.example.server.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,7 +9,10 @@ import org.example.server.service.AuthService;
 import org.example.server.utill.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping(AppConstants.BASE_URL + "/auth")
@@ -66,5 +65,14 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    public record RefreshTokenRequest(String refreshToken) {}
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ApiResponse> delete(UUID id) {
+        ApiResponse response = authService.delete(id);
+        return response.getSuccess() ? ResponseEntity.ok(response)
+                        : ResponseEntity.badRequest().body(response);
+    }
+
+    public record RefreshTokenRequest(String refreshToken) {
+    }
 }

@@ -1,7 +1,3 @@
-// ============================================================================
-// 9. UPDATED: AuthResponse.java (refreshToken field qo'shildi)
-// Location: src/main/java/org/example/server/dto/AuthResponse.java
-// ============================================================================
 package org.example.server.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;

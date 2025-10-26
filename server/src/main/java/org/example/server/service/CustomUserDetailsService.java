@@ -1,6 +1,4 @@
 package org.example.server.service;
-
-import org.example.server.entity.User;
 import org.example.server.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

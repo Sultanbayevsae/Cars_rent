@@ -2,6 +2,7 @@ package org.example.server.controller;
 
 import org.example.server.dto.ApiResponse;
 import org.example.server.service.UserPhotoService;
+import org.example.server.utill.AppConstants;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/user-photo")
+@RequestMapping(AppConstants.BASE_URL + "/user-photo")
 public class UserPhotoController {
     private final UserPhotoService userPhotoService;
 

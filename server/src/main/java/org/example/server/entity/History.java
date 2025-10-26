@@ -25,7 +25,7 @@ public class History extends Base{
     private Car car;
 
     @Column(name = "rental_time", nullable = false)
-    private LocalDateTime rental_time;
+    private LocalDateTime rentalTime;
     @Column(name = "return_time")
-    private LocalDateTime return_time;
+    private LocalDateTime returnTime;
 }

@@ -1,11 +1,11 @@
---liquibase formatted sql
---changeset system:011
-CREATE TABLE liked_cars (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL,
-    car_id UUID NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_liked_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-    CONSTRAINT fk_liked_car FOREIGN KEY(car_id) REFERENCES cars(id) ON DELETE CASCADE
-);
+----liquibase formatted sql
+----changeset system:011
+--CREATE TABLE liked_cars (
+--    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+--    user_id UUID NOT NULL,
+--    car_id UUID NOT NULL,
+--    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--    CONSTRAINT fk_liked_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+--    CONSTRAINT fk_liked_car FOREIGN KEY(car_id) REFERENCES cars(id) ON DELETE CASCADE
+--);

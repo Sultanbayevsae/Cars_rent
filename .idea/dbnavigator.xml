@@ -34,10 +34,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" object-ref="schemas/public/tables/branches" />
-      <object connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" object-ref="schemas/public/tables/addresses" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="94a06344-de6e-4eb6-abb8-32abca97892f" />
@@ -172,7 +169,7 @@
           <description value="Connection by DB Navigator" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
-          <database-version value="9999.0" />
+          <database-version value="16.1" />
           <driver-source value="BUNDLED" />
           <driver-library value="" />
           <driver value="" />
@@ -190,7 +187,7 @@
           <token-type value="" />
           <token-config-file value="" />
           <token-profile value="" />
-          <session-user value="" />
+          <session-user value="postgres" />
         </database>
         <properties>
           <auto-commit value="false" />

@@ -22,9 +22,8 @@ import java.util.UUID;
 
 @Tag(name = "Branch Controller", description = "APIs for managing branches")
 @RestController
-@RequestMapping(BranchController.BaseUrl)
+@RequestMapping(AppConstants.BASE_URL + "/branch")
 public class BranchController {
-    public static final String BaseUrl = AppConstants.BASE_URL + "/branch";
     private final BranchRepository branchRepository;
     private final BranchService branchService;
 
@@ -48,15 +47,12 @@ public class BranchController {
     )
     @PostMapping("/create")
     public ResponseEntity<ApiResponse> create(@RequestBody @Valid BranchCreator branchCreator) {
-        System.out.println("=== BRANCH/CREATE DEBUG ===");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("User: " + (auth != null ? auth.getName() : "NULL"));
         System.out.println("Authenticated: " + (auth != null ? auth.isAuthenticated() : "false"));
         if (auth != null) {
             System.out.println("Roles: " + auth.getAuthorities());
         }
-        System.out.println("==========================");
-
         ApiResponse response = branchService.createBranch(branchCreator);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

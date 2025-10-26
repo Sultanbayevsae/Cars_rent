@@ -1,4 +1,3 @@
-//CLAUDE
 package org.example.server.entity;
 
 import jakarta.persistence.*;
@@ -58,14 +57,9 @@ public class User extends Base implements UserDetails {
     @Column(nullable = false)
     private boolean enabled = false;
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Address address;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> history = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<LikedCars> likedCars = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

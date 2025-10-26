@@ -1,8 +1,4 @@
-// ============================================================================
-// 11. NEW: GlobalExceptionHandler.java
-// Location: src/main/java/org/example/server/exception/GlobalExceptionHandler.java
-// ============================================================================
-        package org.example.server.exception;
+package org.example.server.exception;
 
 import org.example.server.dto.ApiResponse;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,5 @@
 --liquibase formatted sql
 --changeset system:301
---comment: example view for quick admin queries
 
 CREATE OR REPLACE VIEW v_user_summary AS
 SELECT

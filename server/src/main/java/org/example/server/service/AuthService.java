@@ -14,4 +14,5 @@ public interface AuthService {
     AuthResponse login(LoginDto dto);
     AuthResponse refresh(String refreshToken);
     void logout(UUID userId);
+    ApiResponse delete(UUID userId);
 }

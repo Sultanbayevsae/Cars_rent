@@ -1,6 +1,5 @@
 --liquibase formatted sql
 --changeset system:100
---comment: seed roles (idempotent via ON CONFLICT)
 
 INSERT INTO roles (role_name, role_code)
 VALUES

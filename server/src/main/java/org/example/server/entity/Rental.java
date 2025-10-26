@@ -50,6 +50,6 @@ public class Rental{
     @Column(name = "rental_status", nullable = false)
     private RentalStatus rentalStatus;
 
-    @OneToOne(mappedBy = "rental", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "rental", cascade = CascadeType.ALL)
     private Payment payment;
 }

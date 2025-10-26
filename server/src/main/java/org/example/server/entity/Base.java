@@ -1,5 +1,5 @@
 package org.example.server.entity;
-//FIXED BY CLAUDE
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

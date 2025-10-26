@@ -1,7 +1,3 @@
-// ============================================================================
-// 8. FIXED: AuthServiceImpl.java
-// Location: src/main/java/org/example/server/service/impl/AuthServiceImpl.java
-// ============================================================================
 package org.example.server.service.impl;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +10,7 @@ import org.example.server.repository.RoleRepository;
 import org.example.server.repository.UserRepository;
 import org.example.server.security.JwtUtil;
 import org.example.server.service.AuthService;
+import org.example.server.service.EmailService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -34,6 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
+    private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
@@ -72,7 +70,7 @@ public class AuthServiceImpl implements AuthService {
 
         log.info("User registered successfully: {}", dto.email());
 
-        // TODO: Email/SMS yuborish logikasi
+        emailService.sendVerificationEmail(user, accessToken);
         return new ApiResponse(true, "User registered successfully. Check your email/phone for verification.", accessToken);
     }
 
@@ -117,6 +115,20 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    public ApiResponse delete(UUID userId) {
+        try {
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            userRepository.delete(user);
+            return new ApiResponse(true, "User deleted successfully");
+
+        } catch (Exception e) {
+            return new ApiResponse(false, "Failed to delete user: " + e.getMessage());
+        }
+    }
+
+    @Override
     public AuthResponse login(LoginDto dto) {
         User user = userRepository.findByEmailOrPhoneNumber(dto.emailOrPhone())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -128,7 +140,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            user.getEmail(), // Spring Security username (email)
+                            user.getEmail(),
                             dto.password()
                     )
             );
@@ -143,7 +155,7 @@ public class AuthServiceImpl implements AuthService {
         log.info("User logged in successfully: {}", user.getEmail());
 
         AuthResponse response = new AuthResponse(accessToken);
-        response.setRefreshToken(refreshToken); // Yangi field qo'shish kerak AuthResponse'ga
+        response.setRefreshToken(refreshToken);
         return response;
     }
 
@@ -174,4 +186,5 @@ public class AuthServiceImpl implements AuthService {
     public void logout(UUID userId) {
         log.info("User logged out: {}", userId);
     }
+
 }
