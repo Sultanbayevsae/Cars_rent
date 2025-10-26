@@ -14,6 +14,8 @@ import org.example.server.service.BranchService;
 import org.example.server.utill.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -46,6 +48,15 @@ public class BranchController {
     )
     @PostMapping("/create")
     public ResponseEntity<ApiResponse> create(@RequestBody @Valid BranchCreator branchCreator) {
+        System.out.println("=== BRANCH/CREATE DEBUG ===");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("User: " + (auth != null ? auth.getName() : "NULL"));
+        System.out.println("Authenticated: " + (auth != null ? auth.isAuthenticated() : "false"));
+        if (auth != null) {
+            System.out.println("Roles: " + auth.getAuthorities());
+        }
+        System.out.println("==========================");
+
         ApiResponse response = branchService.createBranch(branchCreator);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -161,10 +172,9 @@ public class BranchController {
                     )
             }
     )
-    @PutMapping("/update/{id}")
-    public ResponseEntity<ApiResponse> update(@RequestBody @Valid BranchUpdater branchUpdater) {
-        ApiResponse response = branchService.updateBranch(branchUpdater);
-        return ResponseEntity.ok(response);
+    @PutMapping("/update")
+    public ResponseEntity<ApiResponse> update(@RequestBody @Valid BranchUpdater updater) {
+        return ResponseEntity.ok(branchService.updateBranch(updater));
     }
 
 

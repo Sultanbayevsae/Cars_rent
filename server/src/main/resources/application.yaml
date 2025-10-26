@@ -23,6 +23,6 @@ logging:
 
 jwt:
   secret:
-    key: 4546a6e1745c9b6a5ae28d36b629b0d78830d29fceb82f47cfb254ca1debc291
-    expired-date: 8640000
-
+    key: supercalifragilisticexpialidociousNewChemicalUndisputableLeadershipOfWorldLeaders202510
+    access-exp-ms: 9000000
+    refresh-exp-ms: 12096000000

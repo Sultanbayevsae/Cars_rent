@@ -10,5 +10,6 @@ import java.util.UUID;
 
 public interface UserService {
     ApiResponse activateUser(UUID id);
+    ApiResponse ignoreActivation(UUID id);
 
 }

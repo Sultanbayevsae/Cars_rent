@@ -1,14 +1,17 @@
 package org.example.server.service;
 
-import jakarta.validation.Valid;
-import org.apache.coyote.BadRequestException;
+import org.example.server.dto.ApiResponse;
 import org.example.server.dto.AuthResponse;
 import org.example.server.dto.LoginDto;
 import org.example.server.dto.RegisterDto;
 
-public interface AuthService {
-    AuthResponse login(@Valid LoginDto dto) throws BadRequestException;
-    AuthResponse register(@Valid RegisterDto dto) throws BadRequestException;
-    void logout(String token) throws BadRequestException;
+import java.util.UUID;
 
+public interface AuthService {
+    ApiResponse register(RegisterDto dto);
+    boolean verifyEmail(String token);
+    boolean ignoreVerification(String token);
+    AuthResponse login(LoginDto dto);
+    AuthResponse refresh(String refreshToken);
+    void logout(UUID userId);
 }

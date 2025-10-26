@@ -1,29 +1,38 @@
 databaseChangeLog:
+  # 1. Utilities
   - include:
       file: db/changelog/changeset/uuid.sql
+
+  # 2. Create Tables
   - include:
-      file: db/changelog/changeset/create/create_user.sql
+      file: db/changelog/changeset/create/create_roles_table.sql
+  - include:
+      file: db/changelog/changeset/create/create_users_table.sql
+  - include:
+      file: db/changelog/changeset/create/create_users_roles_table.sql
   - include:
       file: db/changelog/changeset/create/create_address.sql
   - include:
       file: db/changelog/changeset/create/create_branches.sql
   - include:
+      file: db/changelog/changeset/create/create_region.sql
+  - include:
+      file: db/changelog/changeset/create/create_district.sql
+  - include:
       file: db/changelog/changeset/create/create_car.sql
   - include:
       file: db/changelog/changeset/create/create_cars_photo.sql
   - include:
-      file: db/changelog/changeset/create/create_region.sql
-  - include:
-      file: db/changelog/changeset/create/create_district.sql
-#  - include:
-#      file: db/changelog/changeset/create/create_history.sql
-  - include:
       file: db/changelog/changeset/create/create_liked_cars.sql
-#  - include:
-#      file: db/changelog/changeset/create/create_rating.sql
-  - include:
-      file: db/changelog/changeset/create/create_roles.sql
   - include:
       file: db/changelog/changeset/create/create_user_photo.sql
+
+  # 3. Alter Tables
   - include:
-      file: db/changelog/changeset/create/create_users_roles.sql
+      file: db/changelog/changeset/alter/add_account_flags_to_users.sql
+
+  # 4. Insert/Seed Data
+  - include:
+      file: db/changelog/changeset/insertions/insert_roles.sql
+  - include:
+      file: db/changelog/changeset/insertions/insert_admin_user.sql

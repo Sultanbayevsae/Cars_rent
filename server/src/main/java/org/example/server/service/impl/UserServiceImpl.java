@@ -37,4 +37,13 @@ public class UserServiceImpl implements UserService {
         return new ApiResponse(true, "🎉 Profilingiz muvaffaqiyatli aktivlashtirildi!");
     }
 
+    @Override
+    public ApiResponse ignoreActivation(UUID id) {
+        Optional<User> optional = userRepository.findById(id);
+        if (optional.isEmpty())
+            return new ApiResponse(false, "User Not Found!");
+        userRepository.deleteById(id);
+        return new ApiResponse(true, "Activation for this account has been ignored and deleted!...");
+    }
+
 }

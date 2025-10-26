@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "payments")
@@ -21,12 +22,12 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "")
+    @OneToOne
     @JoinColumn(name = "rental_id", nullable = false)
     private Rental rental;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "payment_method",nullable = false)
+    @Column(name = "payment_method", nullable = false)
     private PaymentMethod method;
 
     @Column(name = "amount", nullable = false)
@@ -37,7 +38,7 @@ public class Payment {
     private PaymentStatus status;
 
     @Column(name = "transaction_id", nullable = false)
-    private String transactionId; // from bank API
+    private String transactionId;
 
     @Column(name = "payment_date", nullable = false)
     private LocalDateTime paymentDate;

@@ -2,6 +2,7 @@ package org.example.server.service.impl;
 
 import org.example.server.dto.ApiResponse;
 import org.example.server.dto.BranchCreator;
+import org.example.server.dto.BranchResponse;
 import org.example.server.dto.BranchUpdater;
 import org.example.server.entity.Branch;
 import org.example.server.mapper.BranchMapper;
@@ -12,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BranchImplService implements BranchService {
@@ -26,7 +29,6 @@ public class BranchImplService implements BranchService {
     }
 
 
-
     @Override
     @Transactional
     public ApiResponse createBranch(BranchCreator branchCreator) {
@@ -38,24 +40,26 @@ public class BranchImplService implements BranchService {
     @Override
     public ApiResponse getAllBranches() {
         List<Branch> branches = branchRepository.findAll();
-        if(branches.isEmpty()) {
+        if (branches.isEmpty()) {
             return new ApiResponse(false, "No branches found!");
         }
-        return new ApiResponse(true, "Branches retrieved successfully!", branches);
+        Set<BranchResponse> branchResponses = branches
+                .stream().map(branchMapper::toResponse).collect(Collectors.toSet());
+        return new ApiResponse(true, "Branches retrieved successfully!", branchResponses);
     }
 
     @Override
     public ApiResponse getBranchById(UUID branchId) {
         Optional<Branch> branch = branchRepository.findById(branchId);
-        if(branch.isPresent()) {
-            return new ApiResponse(true, "Branch retrieved successfully!", branch.get());
-        }
-        return new ApiResponse(false, "Branch with id " + branchId + " not found!");
+        return branch.map(value -> {
+            BranchResponse response = branchMapper.toResponse(value);
+            return new ApiResponse(true, "Branch retrieved!", response);
+        }).orElseGet(() -> new ApiResponse(false, "Branch not found!"));
     }
 
     @Override
     public ApiResponse deleteBranchById(UUID branchId) {
-        if(!branchRepository.existsById(branchId)) {
+        if (!branchRepository.existsById(branchId)) {
             return new ApiResponse(false, "Branch does not exist!");
         }
         branchRepository.deleteById(branchId);
@@ -63,12 +67,11 @@ public class BranchImplService implements BranchService {
     }
 
     @Override
-    public ApiResponse updateBranch(BranchUpdater branchUpdater) {
-        Branch entity = branchRepository.findById(branchUpdater.id())
-                .orElseThrow(() -> new RuntimeException("Branch with id " + branchUpdater.id() + " not found!"));
+    public ApiResponse updateBranch(BranchUpdater updater) {
+        Branch branch = branchRepository.findById(updater.id())
+                .orElseThrow(() -> new RuntimeException("Branch with ID " + updater.id() + " not found"));
+        branchMapper.updateBranchFromDto(updater, branch);
 
-        branchMapper.updateBranchFromDto(branchUpdater, entity);
-        branchRepository.save(entity);
-        return new ApiResponse(true, "Branch has been successfully updated!");
+        return new ApiResponse(true, "Branch successfully updated!");
     }
 }

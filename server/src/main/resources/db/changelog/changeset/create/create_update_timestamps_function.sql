@@ -1,0 +1,11 @@
+--liquibase formatted sql
+--changeset system:200
+--comment: create function to update updated_at timestamp
+
+CREATE OR REPLACE FUNCTION set_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
