@@ -20,6 +20,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/create/create_history.sql
   - include:
+      file: db/changelog/changeset/create/create_liked_cars.sql
+  - include:
       file: db/changelog/changeset/alter/add_account_flags_to_users.sql
   - include:
       file: db/changelog/changeset/insertions/insert_roles.sql

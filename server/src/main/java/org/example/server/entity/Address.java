@@ -18,9 +18,4 @@ public class Address extends Base{
 
     @Column(name = "details", length = 100, nullable = false)
     private String details;
-
-//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id")
-//    private User user;
-
 }
