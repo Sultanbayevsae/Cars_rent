@@ -19,12 +19,10 @@ import java.util.UUID;
 @Tag(name = "Car Controller", description = "Car CRUD operations")
 @RestController
 @RequestMapping(AppConstants.BASE_URL + "/cars")
-public class CarController {;
-    private final CarRepository carRepository;
+public class CarController {
     private final CarService carService;
 
-    public CarController(CarRepository carRepository, CarService carService) {
-        this.carRepository = carRepository;
+    public CarController(CarService carService) {
         this.carService = carService;
     }
 
