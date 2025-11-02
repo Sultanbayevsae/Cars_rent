@@ -34,11 +34,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" object-ref="schemas/public/tables/users" />
-      <object connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" object-ref="schemas/public/tables/addresses" />
-      <object connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" object-ref="schemas/public/tables/branches" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="94a06344-de6e-4eb6-abb8-32abca97892f" />
@@ -46,6 +42,7 @@
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" dataset="public.users" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" dataset="public.user_photo" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" dataset="public.branches" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" dataset="public.users_roles" active-filter-id="" />
     <filter-actions connection-id="94a06344-de6e-4eb6-abb8-32abca97892f" dataset="public.addresses" active-filter-id="EMPTY_FILTER" />

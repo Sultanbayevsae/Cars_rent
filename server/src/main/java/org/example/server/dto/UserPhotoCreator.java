@@ -11,6 +11,6 @@ public record UserPhotoCreator(
 
         @NotBlank(message = "Content type bo‘sh bo‘lmasligi kerak")
         String contentType,
-        Byte[] bytes
+        byte[] bytes
 ) {
 }

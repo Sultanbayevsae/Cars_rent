@@ -22,8 +22,8 @@ import java.util.UUID;
 @EntityListeners(AuditingEntityListener.class)
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Enumerated(EnumType.STRING)
     private TransactionType type;
