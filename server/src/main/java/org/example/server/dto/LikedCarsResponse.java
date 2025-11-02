@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record LIkedCarsResponse(
+public record LikedCarsResponse(
         @NotNull(message = "ID must not be null")
         UUID id,
         @NotNull(message = "User ID must not be null")
