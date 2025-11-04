@@ -20,12 +20,6 @@ public class Rating extends Base{
     @Column(nullable = false)
     private Integer rating;
 
-    @Column(name = "target_id", nullable = false)
-    private UUID targetId;
-
-    @Column(name = "target_type", nullable = false)
-    private String targetType;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
