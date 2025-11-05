@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "notifications")
@@ -16,15 +17,15 @@ import java.time.LocalDateTime;
 @Setter
 public class Notification {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String title;
     private String message;
     private boolean read = false;
 
     @Enumerated(EnumType.STRING)
-    private NotificationType type; // PAYMENT_SUCCESS, REFUND, SYSTEM_ALERT
+    private NotificationType type;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

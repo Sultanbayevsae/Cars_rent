@@ -41,7 +41,7 @@ public class AuthController {
         return ResponseEntity.badRequest().body(new ApiResponse(false, "Invalid or expired token"));
     }
 
-    @DeleteMapping("/ignore-verification")
+    @GetMapping("/ignore-verification")
     @Operation(summary = "Delete unverified account")
     public ResponseEntity<ApiResponse> ignoreVerification(@RequestParam String token) {
         boolean deleted = authService.ignoreVerification(token);

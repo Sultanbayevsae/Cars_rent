@@ -19,11 +19,16 @@ public class PaymentCard{
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(name = "card_number_masked",  nullable = false)
     private String cardNumberMasked;
+
+    @Column(name = "card_holder_name")
     private String cardHolderName;
+    @Column(name = "expiry_date")
     private String expiryDate;
 
     private String token;
+    @Column(name = "is_active")
     private boolean active = true;
 
     @ManyToOne

@@ -40,20 +40,12 @@ public class UserPhotoServiceImpl implements UserPhotoService {
 
             userPhotoRepository.findByUserId(userId)
                     .ifPresent(userPhotoRepository::delete);
-
             byte[] fileBytes = file.getBytes();
-            Byte[] wrappedBytes = new Byte[fileBytes.length];
-            for (int i = 0; i < fileBytes.length; i++) {
-                wrappedBytes[i] = fileBytes[i];
-            }
 
-            UserPhotoCreator creator = new UserPhotoCreator(
-                    userId,
-                    file.getContentType(),
-                    wrappedBytes
-            );
-
-            UserPhoto photo = userPhotoMapper.toEntity(creator, userRepository);
+            UserPhoto photo = new UserPhoto();
+            photo.setBytes(fileBytes);
+            photo.setContentType(file.getContentType());
+            photo.setUser(userRepository.findById(userId).get());
 
             userPhotoRepository.save(photo);
 
@@ -64,17 +56,9 @@ public class UserPhotoServiceImpl implements UserPhotoService {
     }
 
     @Override
-    public Byte[] getPhoto(UUID userId) {
+    public byte[] getPhoto(UUID userId) {
         Optional<UserPhoto> photoOpt = userPhotoRepository.findByUserId(userId);
-        if (photoOpt.isPresent()) {
-            Byte[] wrappedBytes = photoOpt.get().getBytes();
-            Byte[] primitiveBytes = new Byte[wrappedBytes.length];
-            for (int i = 0; i < wrappedBytes.length; i++) {
-                primitiveBytes[i] = wrappedBytes[i];
-            }
-            return primitiveBytes;
-        }
-        return new Byte[0];
+        return photoOpt.map(UserPhoto::getBytes).orElse(new byte[0]);
     }
 
     @Override

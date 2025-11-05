@@ -14,11 +14,23 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/create/create_car.sql
   - include:
+      file: db/changelog/changeset/create/create_rentals_table.sql
+  - include:
+      file: db/changelog/changeset/create/create_payments_table.sql
+  - include:
+      file: db/changelog/changeset/create/create_payment_cards_table.sql
+  - include:
+      file: db/changelog/changeset/create/create_transactions_table.sql
+  - include:
+      file: db/changelog/changeset/create/create_invoices_table.sql
+  - include:
       file: db/changelog/changeset/create/create_cars_photo.sql
   - include:
       file: db/changelog/changeset/create/create_user_photo.sql
   - include:
-      file: db/changelog/changeset/create/create_history.sql
+      file: db/changelog/changeset/create/create_history_table.sql
+  - include:
+      file: db/changelog/changeset/create/create_notifications_table.sql
   - include:
       file: db/changelog/changeset/create/create_liked_cars.sql
   - include:
