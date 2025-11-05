@@ -5,7 +5,7 @@ import org.example.server.dto.RatingCreateDTO;
 import org.example.server.dto.RatingUpdateDTO;
 import org.example.server.entity.Comments;
 import org.example.server.entity.Rating;
-import org.example.server.mapper.RatingRepository;
+import org.example.server.repository.RatingRepository;
 import org.example.server.repository.CarRepository;
 import org.example.server.repository.CommentsRepository;
 import org.example.server.repository.UserRepository;
@@ -127,7 +127,7 @@ public class RatingImplService implements RatingService {
     @Override
     @Transactional(readOnly = true)
     public ApiResponse getAverageRatingByCarId(UUID car_id) {
-        Double average = ratingRepository.getAverageRatingByCarId(car_id);
+        Double average = ratingRepository.findAverageRatingByCarId(car_id);
         if(average == null){
             return new ApiResponse(false, "No ratings found for this car");
         }
@@ -137,7 +137,7 @@ public class RatingImplService implements RatingService {
     @Override
     @Transactional(readOnly = true)
     public ApiResponse getAverageRatingByCommentsId(UUID comments_id) {
-        Double average = ratingRepository.getAverageRatingByCommnetsId(comments_id);
+        Double average = ratingRepository.getAverageRatingByCommnentsId(comments_id);
         if(average == null){
             return new ApiResponse(false, "No ratings found for this comment");
         }

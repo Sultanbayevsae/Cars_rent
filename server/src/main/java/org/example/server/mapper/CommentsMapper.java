@@ -18,10 +18,10 @@ public interface CommentsMapper {
 
 
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "user", source = "creator.userId", qualifiedByName = "mapUser")
-    @Mapping(target = "car", source = "creator.carId", qualifiedByName = "mapCar")
-    @Mapping(target = "ratings", ignore = true)
+//    @Mapping(target = "id", ignore = true)
+//    @Mapping(target = "user", source = "creator.userId", qualifiedByName = "mapUser")
+//    @Mapping(target = "car", source = "creator.carId", qualifiedByName = "mapCar")
+//    @Mapping(target = "ratings", ignore = true)
     Comments toEntity(CommentsCreator creator, @Context UserRepository userRepository, @Context CarRepository carRepository);
 
 
@@ -37,10 +37,10 @@ public interface CommentsMapper {
                 .orElseThrow(() -> new RuntimeException("Car not found: " + carId));
     }
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "user", source = "updater.user", qualifiedByName = "mapUserEntity")
-    @Mapping(target = "car", source = "updater.car", qualifiedByName = "mapCarEntity")
-    @Mapping(target = "ratings", ignore = true)
+//    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+//    @Mapping(target = "user", source = "updater.user", qualifiedByName = "mapUserEntity")
+//    @Mapping(target = "car", source = "updater.car", qualifiedByName = "mapCarEntity")
+//    @Mapping(target = "ratings", ignore = true)
     void updateCommentFromDto(CommentUpdateDTO updater, @MappingTarget Comments comments, @Context UserRepository userRepository, @Context CarRepository carRepository);
 
     @Named("mapUserEntity")

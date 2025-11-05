@@ -10,5 +10,4 @@ import java.util.UUID;
 
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, UUID> {
-    List<Comments> findAllByCarId(Long carId);
 }
