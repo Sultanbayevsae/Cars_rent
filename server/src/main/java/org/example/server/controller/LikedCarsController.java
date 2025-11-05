@@ -79,7 +79,7 @@ public class LikedCarsController {
         ApiResponse response = likedCarsService.deleteLikedCar(likedCarId);
 
         if(response.getSuccess()){
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok(response);
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);

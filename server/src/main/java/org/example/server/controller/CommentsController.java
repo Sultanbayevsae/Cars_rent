@@ -88,7 +88,7 @@ public class CommentsController {
     public ResponseEntity<ApiResponse> delete(@PathVariable UUID id) {
         ApiResponse response = commentsService.deleteComment(id);
         if (response.getSuccess()){
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok(response);
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
