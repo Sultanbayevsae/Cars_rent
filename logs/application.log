@@ -789,3 +789,84 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:101) ~[spring-data-jpa-3.5.4.jar:3.5.4]
 	... 61 common frames omitted
 
+2025-11-05T10:01:40.418+05:00  INFO 18612 --- [main] org.example.server.ServerApplication     : Starting ServerApplication using Java 21.0.8 with PID 18612 (D:\IdeaProjects\Cars_rent\server\target\classes started by hp in D:\IdeaProjects\Cars_rent)
+2025-11-05T10:01:40.421+05:00 DEBUG 18612 --- [main] org.example.server.ServerApplication     : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-11-05T10:01:40.421+05:00  INFO 18612 --- [main] org.example.server.ServerApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-11-05T10:01:41.122+05:00  INFO 18612 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-05T10:01:41.203+05:00  INFO 18612 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 17 JPA repository interfaces.
+2025-11-05T10:01:42.131+05:00  INFO 18612 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-11-05T10:01:42.144+05:00  INFO 18612 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-05T10:01:42.144+05:00  INFO 18612 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-11-05T10:01:42.201+05:00  INFO 18612 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-05T10:01:42.201+05:00  INFO 18612 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1705 ms
+2025-11-05T10:01:42.404+05:00  INFO 18612 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-11-05T10:01:42.575+05:00  INFO 18612 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@c6a692e
+2025-11-05T10:01:42.576+05:00  INFO 18612 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-11-05T10:01:42.722+05:00  INFO 18612 --- [main] liquibase.database                       : Set default schema name to public
+2025-11-05T10:01:42.957+05:00  INFO 18612 --- [main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-11-05T10:01:43.062+05:00  INFO 18612 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2025-11-05T10:01:43.064+05:00  INFO 18612 --- [main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-11-05T10:01:43.080+05:00  INFO 18612 --- [main] liquibase.util                           : UPDATE SUMMARY
+2025-11-05T10:01:43.080+05:00  INFO 18612 --- [main] liquibase.util                           : Run:                          0
+2025-11-05T10:01:43.080+05:00  INFO 18612 --- [main] liquibase.util                           : Previously run:              20
+2025-11-05T10:01:43.080+05:00  INFO 18612 --- [main] liquibase.util                           : Filtered out:                 0
+2025-11-05T10:01:43.080+05:00  INFO 18612 --- [main] liquibase.util                           : -------------------------------
+2025-11-05T10:01:43.080+05:00  INFO 18612 --- [main] liquibase.util                           : Total change sets:           20
+2025-11-05T10:01:43.082+05:00  INFO 18612 --- [main] liquibase.util                           : Update summary generated
+2025-11-05T10:01:43.083+05:00  INFO 18612 --- [main] liquibase.command                        : Command execution complete
+2025-11-05T10:01:44.218+05:00  INFO 18612 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-05T10:01:44.265+05:00  INFO 18612 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-11-05T10:01:44.296+05:00  INFO 18612 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-11-05T10:01:44.564+05:00  INFO 18612 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-05T10:01:44.653+05:00  INFO 18612 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-11-05T10:01:46.014+05:00  INFO 18612 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-05T10:01:46.017+05:00  INFO 18612 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-05T10:01:46.320+05:00  INFO 18612 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-11-05T10:01:46.846+05:00 DEBUG 18612 --- [main] o.e.s.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2025-11-05T10:01:46.969+05:00  INFO 18612 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-11-05T10:01:47.569+05:00  WARN 18612 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-05T10:01:47.976+05:00 DEBUG 18612 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-11-05T10:01:48.426+05:00  WARN 18612 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-11-05T10:01:48.597+05:00  INFO 18612 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-11-05T10:01:48.606+05:00  INFO 18612 --- [main] org.example.server.ServerApplication     : Started ServerApplication in 8.766 seconds (process running for 9.519)
+2025-11-05T10:02:31.134+05:00  INFO 18612 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-05T10:02:31.134+05:00  INFO 18612 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-11-05T10:02:31.135+05:00  INFO 18612 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-11-05T10:02:31.159+05:00 DEBUG 18612 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui.html
+2025-11-05T10:02:31.167+05:00 DEBUG 18612 --- [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.168+05:00 DEBUG 18612 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui.html
+2025-11-05T10:02:31.267+05:00 DEBUG 18612 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/index.html
+2025-11-05T10:02:31.267+05:00 DEBUG 18612 --- [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.268+05:00 DEBUG 18612 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.html
+2025-11-05T10:02:31.318+05:00 DEBUG 18612 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui.css
+2025-11-05T10:02:31.319+05:00 DEBUG 18612 --- [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.319+05:00 DEBUG 18612 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui.css
+2025-11-05T10:02:31.324+05:00 DEBUG 18612 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/index.css
+2025-11-05T10:02:31.324+05:00 DEBUG 18612 --- [http-nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.325+05:00 DEBUG 18612 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.css
+2025-11-05T10:02:31.326+05:00 DEBUG 18612 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-11-05T10:02:31.326+05:00 DEBUG 18612 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-bundle.js
+2025-11-05T10:02:31.326+05:00 DEBUG 18612 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-initializer.js
+2025-11-05T10:02:31.327+05:00 DEBUG 18612 --- [http-nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.327+05:00 DEBUG 18612 --- [http-nio-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.327+05:00 DEBUG 18612 --- [http-nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.327+05:00 DEBUG 18612 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-bundle.js
+2025-11-05T10:02:31.327+05:00 DEBUG 18612 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-11-05T10:02:31.327+05:00 DEBUG 18612 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-initializer.js
+2025-11-05T10:02:31.499+05:00 DEBUG 18612 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /v3/api-docs/swagger-config
+2025-11-05T10:02:31.499+05:00 DEBUG 18612 --- [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.499+05:00 DEBUG 18612 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /v3/api-docs/swagger-config
+2025-11-05T10:02:31.504+05:00 DEBUG 18612 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/favicon-32x32.png
+2025-11-05T10:02:31.505+05:00 DEBUG 18612 --- [http-nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.505+05:00 DEBUG 18612 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/favicon-32x32.png
+2025-11-05T10:02:31.533+05:00 DEBUG 18612 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /v3/api-docs
+2025-11-05T10:02:31.534+05:00 DEBUG 18612 --- [http-nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-11-05T10:02:31.534+05:00 DEBUG 18612 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /v3/api-docs
+2025-11-05T10:02:32.397+05:00  INFO 18612 --- [http-nio-8080-exec-7] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 847 ms
